@@ -1,0 +1,182 @@
+{
+  "name": "IA Productiva™ Design Tokens",
+  "version": "1.0.0",
+  "description": "Color system, typography, and spacing tokens for IA Productiva educational design system",
+  "tokens": {
+    "colors": {
+      "primary": {
+        "default": "#6B3E42",
+        "light": "#8B5A5E",
+        "dark": "#4B2E32",
+        "rgb": "rgb(107, 62, 66)",
+        "name": "Burgundy - Reflexión & Sabiduría"
+      },
+      "secondary": {
+        "default": "#6FEAD6",
+        "light": "#A8F5E8",
+        "dark": "#4FD4B8",
+        "rgb": "rgb(111, 234, 214)",
+        "name": "Mint - Innovación Accesible"
+      },
+      "accent": {
+        "default": "#D4A574",
+        "bright": "#E8C08C",
+        "muted": "#C49560",
+        "rgb": "rgb(212, 165, 116)",
+        "name": "Gold - Valor Educativo"
+      },
+      "background": {
+        "primary": "#FAFAFA",
+        "secondary": "#F5F5F5",
+        "tertiary": "#EFEFEF",
+        "rgb_primary": "rgb(250, 250, 250)",
+        "name": "Neutrals - Blanco Hueso"
+      },
+      "text": {
+        "primary": "#2C2C2C",
+        "secondary": "#6B6B6B",
+        "tertiary": "#999999",
+        "inverse": "#FFFFFF",
+        "name": "Text Colors"
+      },
+      "semantic": {
+        "success": "#6FEAD6",
+        "warning": "#D4A574",
+        "error": "#8B5A5E",
+        "info": "#6B3E42",
+        "name": "Semantic Colors"
+      },
+      "borders": {
+        "subtle": "#E0E0E0",
+        "default": "#D0D0D0",
+        "emphasis": "#C0C0C0",
+        "name": "Border Colors"
+      }
+    },
+    "typography": {
+      "headings": {
+        "font-family": "Playfair Display, Cormorant, serif",
+        "primary": {
+          "h1": {
+            "font-size": "32px",
+            "font-weight": "600",
+            "line-height": "1.2",
+            "letter-spacing": "-0.5px"
+          },
+          "h2": {
+            "font-size": "28px",
+            "font-weight": "600",
+            "line-height": "1.3",
+            "letter-spacing": "-0.3px"
+          },
+          "h3": {
+            "font-size": "24px",
+            "font-weight": "600",
+            "line-height": "1.4"
+          }
+        }
+      },
+      "body": {
+        "font-family": "Inter, Poppins, -apple-system, sans-serif",
+        "default": {
+          "font-size": "16px",
+          "font-weight": "400",
+          "line-height": "1.6"
+        },
+        "emphasis": {
+          "font-size": "16px",
+          "font-weight": "500",
+          "line-height": "1.6"
+        },
+        "small": {
+          "font-size": "14px",
+          "font-weight": "400",
+          "line-height": "1.5"
+        }
+      },
+      "mono": {
+        "font-family": "JetBrains Mono, Menlo, monospace",
+        "font-size": "14px",
+        "font-weight": "400",
+        "line-height": "1.6"
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "24px",
+      "2xl": "32px",
+      "3xl": "48px",
+      "name": "Spacing Scale"
+    },
+    "border-radius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "full": "9999px",
+      "name": "Corner Radius"
+    },
+    "shadows": {
+      "none": "none",
+      "sm": "0 1px 2px rgba(0,0,0,0.05)",
+      "md": "0 4px 6px rgba(0,0,0,0.07)",
+      "lg": "0 10px 15px rgba(0,0,0,0.1)",
+      "focus": "0 0 0 3px rgba(107, 62, 66, 0.1)",
+      "name": "Shadows (minimal, soft)"
+    },
+    "transitions": {
+      "fast": "150ms ease-in-out",
+      "default": "250ms ease-in-out",
+      "slow": "350ms ease-in-out",
+      "name": "Animation Timing"
+    }
+  },
+  "usage-guide": {
+    "primary-color": "Use #6B3E42 for primary buttons, main navigation, key headings, and focus states.",
+    "secondary-color": "Use #6FEAD6 for secondary actions, success states, highlights, and supportive UI.",
+    "accent-color": "Use #D4A574 for calls-to-action, badges, warnings, and emphasis elements.",
+    "background": "Always use #FAFAFA as primary background for maximum contrast and readability.",
+    "typography": "Serif (Playfair/Cormorant) for editorials and prestigious headings; sans-serif (Inter/Poppins) for all body text and UI.",
+    "spacing": "Use 8px as base unit for components (multiples of 8px maintain visual rhythm).",
+    "border-radius": "Use 8px (md) for most components; 12px (lg) for cards; 4px (sm) for inputs.",
+    "contrast": "All text meets WCAG AA minimum 4.5:1 ratio. Dark text (#2C2C2C) on light backgrounds.",
+    "accessibility": "Never rely on color alone; use text labels and semantic HTML. Test in light/dark modes."
+  },
+  "export-formats": {
+    "css-variables": "Copy below to :root {} in your CSS",
+    "tailwind-config": "Extend tailwindConfig.theme.colors with these values",
+    "figma": "Import this JSON to Figma Design Tokens plugin"
+  },
+  "css-custom-properties": [
+    "--color-primary: #6B3E42;",
+    "--color-primary-light: #8B5A5E;",
+    "--color-primary-dark: #4B2E32;",
+    "--color-secondary: #6FEAD6;",
+    "--color-secondary-light: #A8F5E8;",
+    "--color-secondary-dark: #4FD4B8;",
+    "--color-accent: #D4A574;",
+    "--color-accent-bright: #E8C08C;",
+    "--color-accent-muted: #C49560;",
+    "--color-bg-primary: #FAFAFA;",
+    "--color-bg-secondary: #F5F5F5;",
+    "--color-bg-tertiary: #EFEFEF;",
+    "--color-text-primary: #2C2C2C;",
+    "--color-text-secondary: #6B6B6B;",
+    "--color-text-tertiary: #999999;",
+    "--color-text-inverse: #FFFFFF;",
+    "--color-border: #E0E0E0;",
+    "--color-success: #6FEAD6;",
+    "--color-warning: #D4A574;",
+    "--color-error: #8B5A5E;",
+    "--font-serif: 'Playfair Display', 'Cormorant', serif;",
+    "--font-sans: 'Inter', 'Poppins', -apple-system, sans-serif;",
+    "--font-mono: 'JetBrains Mono', 'Menlo', monospace;",
+    "--radius-sm: 4px;",
+    "--radius-md: 8px;",
+    "--radius-lg: 12px;",
+    "--spacing-unit: 8px;"
+  ]
+}

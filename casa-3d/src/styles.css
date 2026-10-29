@@ -1,0 +1,144 @@
+:root {
+  --bg: rgba(255, 255, 255, 0.86);
+  --bg-solid: #ffffff;
+  --text: #1f2328;
+  --muted: #6b7078;
+  --line: rgba(31, 35, 40, 0.1);
+  --accent: #b5793f;
+  --accent-soft: #f4e8dc;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(20, 24, 30, 0.16);
+  --panel-w: 300px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #dfe7ec; }
+body { -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+#app, #app canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.hidden { display: none !important; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:disabled { opacity: 0.45; cursor: default; }
+
+/* ---------- Carga ---------- */
+#loader {
+  position: fixed; inset: 0; display: grid; place-items: center; z-index: 50;
+  background: linear-gradient(160deg, #eef2f4, #d9e2e8); transition: opacity 0.6s;
+}
+#loader.done { opacity: 0; pointer-events: none; }
+.loader-card { text-align: center; color: var(--muted); }
+.spinner {
+  width: 44px; height: 44px; margin: 0 auto 14px; border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.1); border-top-color: var(--accent); animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Barra superior ---------- */
+#topbar {
+  position: fixed; top: 12px; left: 12px; right: 12px; height: 56px; z-index: 10;
+  display: flex; align-items: center; gap: 12px; padding: 0 10px;
+  background: var(--bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.brand { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.brand strong { font-size: 16px; letter-spacing: 0.2px; }
+.brand span { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-actions { margin-left: auto; display: flex; gap: 6px; }
+.icon-btn {
+  width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--bg-solid); font-size: 17px; display: grid; place-items: center; flex: none;
+}
+.icon-btn:hover { background: var(--accent-soft); }
+
+/* ---------- Panel ---------- */
+#panel {
+  position: fixed; top: 80px; left: 12px; bottom: 12px; width: var(--panel-w); z-index: 9;
+  overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 14px;
+  background: var(--bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.35s ease, opacity 0.35s;
+  overscroll-behavior: contain;
+}
+#panel.collapsed { transform: translateX(calc(-100% - 20px)); opacity: 0; pointer-events: none; }
+#panel h3 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
+.btn {
+  border: 1px solid var(--line); background: var(--bg-solid); border-radius: 10px; padding: 9px 10px;
+  font-size: 13px; transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn.active { background: var(--accent-soft); border-color: var(--accent); }
+.btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+.btn.small { padding: 7px 10px; font-size: 12.5px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.grid3 .btn { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 18px; padding: 10px 4px; }
+.grid3 .btn span { font-size: 11.5px; line-height: 1.15; }
+.row { display: flex; gap: 6px; }
+.row .btn { flex: 1; padding: 9px 4px; }
+.progress { height: 4px; border-radius: 4px; background: var(--line); margin-top: 8px; overflow: hidden; }
+#tourProgress { height: 100%; width: 0; background: var(--accent); transition: width 0.2s linear; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips .btn { padding: 7px 11px; font-size: 12.5px; border-radius: 20px; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 0; font-size: 13.5px; }
+.toggle-row + .toggle-row { border-top: 1px solid var(--line); }
+.switch { width: 44px; height: 26px; border-radius: 13px; border: none; background: #c9cdd2; position: relative; padding: 0; transition: background 0.2s; }
+.switch i { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.switch.on { background: var(--accent); }
+.switch.on i { transform: translateX(18px); }
+.segmented { display: flex; background: rgba(0, 0, 0, 0.06); border-radius: 9px; padding: 2px; }
+.segmented button { border: none; background: none; padding: 6px 8px; border-radius: 7px; font-size: 12px; color: var(--muted); }
+.segmented button.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+.tip { margin: auto 0 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* ---------- Indicadores ---------- */
+#roomLabel {
+  position: fixed; top: 84px; left: 50%; transform: translateX(-50%); z-index: 8;
+  padding: 8px 18px; border-radius: 22px; background: rgba(20, 22, 26, 0.72); color: #fff;
+  font-size: 14px; letter-spacing: 0.3px; backdrop-filter: blur(6px); pointer-events: none;
+  transition: opacity 0.3s;
+}
+#toast {
+  position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%); z-index: 20;
+  padding: 9px 16px; border-radius: 10px; background: rgba(20, 22, 26, 0.85); color: #fff; font-size: 13px; pointer-events: none;
+}
+#tourBar { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 12; }
+.round {
+  width: 52px; height: 52px; border-radius: 50%; border: none; font-size: 20px;
+  background: var(--bg); box-shadow: var(--shadow); backdrop-filter: blur(10px); display: grid; place-items: center;
+}
+.round:active { transform: scale(0.94); }
+
+/* ---------- Primera persona ---------- */
+.crosshair { position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px; border-radius: 50%; background: rgba(255,255,255,.85); box-shadow: 0 0 0 1px rgba(0,0,0,.35); pointer-events: none; z-index: 7; }
+#fpHint {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 8; pointer-events: none;
+  padding: 8px 14px; border-radius: 10px; background: rgba(20, 22, 26, 0.65); color: #fff; font-size: 12.5px; white-space: nowrap;
+}
+#joystick {
+  position: fixed; left: 28px; bottom: 28px; width: 128px; height: 128px; border-radius: 50%; z-index: 12;
+  background: rgba(255, 255, 255, 0.28); border: 2px solid rgba(255, 255, 255, 0.6); display: none; touch-action: none;
+  backdrop-filter: blur(4px);
+}
+#joystick .knob { position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; margin: -27px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); box-shadow: var(--shadow); }
+.fp-actions { position: fixed; right: 22px; bottom: 28px; display: flex; gap: 10px; z-index: 12; }
+.touch #joystick { display: block; }
+.touch #fpHint { display: none; }
+
+/* ---------- Ayuda ---------- */
+#help { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(15, 18, 22, 0.45); padding: 16px; }
+.help-card { background: #fff; border-radius: 18px; padding: 22px; max-width: 720px; width: 100%; box-shadow: var(--shadow); max-height: 90vh; overflow: auto; }
+.help-card h2 { margin: 0 0 14px; font-size: 20px; }
+.help-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 24px; margin-bottom: 16px; }
+.help-card h4 { margin: 8px 0 4px; }
+.help-card ul { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; color: #3a3f45; }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 760px) {
+  #topbar { top: 8px; left: 8px; right: 8px; height: 50px; }
+  .brand span { display: none; }
+  #panel { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; max-height: 56vh; }
+  #panel.collapsed { transform: translateY(calc(100% + 20px)); }
+  #roomLabel { top: 68px; font-size: 13px; }
+  .help-grid { grid-template-columns: 1fr; }
+  #tourBar { bottom: 16px; }
+}

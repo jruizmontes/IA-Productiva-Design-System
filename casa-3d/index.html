@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1f2328" />
+    <title>Casa Moderna 3D</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Pantalla de carga -->
+    <div id="loader">
+      <div class="loader-card">
+        <div class="spinner"></div>
+        <p>Construyendo la vivienda…</p>
+      </div>
+    </div>
+
+    <!-- Barra superior -->
+    <header id="topbar">
+      <button id="menuBtn" class="icon-btn" aria-label="Mostrar u ocultar panel" title="Panel">☰</button>
+      <div class="brand">
+        <strong>Casa Moderna 3D</strong>
+        <span>Vivienda de una planta · 2 dormitorios · 130 m²</span>
+      </div>
+      <div class="top-actions">
+        <button id="helpBtn" class="icon-btn" aria-label="Ayuda" title="Ayuda">?</button>
+        <button id="fsBtn" class="icon-btn" aria-label="Pantalla completa" title="Pantalla completa">⛶</button>
+      </div>
+    </header>
+
+    <!-- Panel de control -->
+    <aside id="panel">
+      <section>
+        <h3>Vistas</h3>
+        <div class="grid3">
+          <button data-view="exterior" class="btn active">🏠<span>Exterior 360°</span></button>
+          <button data-view="aerial" class="btn">🗺️<span>Vista aérea</span></button>
+          <button data-view="fp" class="btn">🚶<span>Primera persona</span></button>
+        </div>
+      </section>
+
+      <section>
+        <h3>Recorrido virtual</h3>
+        <div class="row">
+          <button id="tourStart" class="btn primary">▶ Iniciar</button>
+          <button id="tourPause" class="btn" disabled>⏸ Pausar</button>
+          <button id="tourRestart" class="btn" disabled>⟲ Reiniciar</button>
+        </div>
+        <div class="progress"><div id="tourProgress"></div></div>
+      </section>
+
+      <section>
+        <h3>Habitaciones</h3>
+        <div id="roomList" class="chips"></div>
+      </section>
+
+      <section>
+        <h3>Visualización</h3>
+        <div class="toggle-row">
+          <span>Techo</span>
+          <button id="roofBtn" class="switch on" role="switch" aria-checked="true"><i></i></button>
+        </div>
+        <div class="toggle-row">
+          <span>Paredes</span>
+          <div class="segmented" id="wallSeg">
+            <button data-walls="full" class="active">Completas</button>
+            <button data-walls="cut">Recortadas</button>
+            <button data-walls="hidden">Ocultas</button>
+          </div>
+        </div>
+        <div class="toggle-row">
+          <span>Puertas</span>
+          <button id="doorsBtn" class="btn small">🚪 Abrir todas</button>
+        </div>
+        <div class="toggle-row">
+          <span>Iluminación</span>
+          <button id="dayBtn" class="btn small">🌙 Modo noche</button>
+        </div>
+      </section>
+      <p class="tip">Consejo: toca o haz clic sobre una puerta para abrirla o cerrarla.</p>
+    </aside>
+
+    <!-- Indicadores -->
+    <div id="roomLabel" class="hidden"></div>
+    <div id="toast" class="hidden"></div>
+
+    <!-- Controles flotantes del recorrido -->
+    <div id="tourBar" class="hidden">
+      <button id="tbPause" class="round" title="Pausar / continuar">⏸</button>
+      <button id="tbRestart" class="round" title="Reiniciar">⟲</button>
+      <button id="tbExit" class="round" title="Salir del recorrido">✕</button>
+    </div>
+
+    <!-- Primera persona -->
+    <div id="fpHud" class="hidden">
+      <div class="crosshair"></div>
+      <div id="fpHint">W A S D / flechas: caminar · Mayús: correr · Arrastra: mirar · E: puerta · Esc: salir</div>
+      <div id="joystick"><div class="knob"></div></div>
+      <div class="fp-actions">
+        <button id="fpDoor" class="round" title="Abrir o cerrar la puerta más cercana">🚪</button>
+        <button id="fpExit" class="round" title="Salir de primera persona">✕</button>
+      </div>
+    </div>
+
+    <!-- Ayuda -->
+    <div id="help" class="hidden" role="dialog" aria-modal="true">
+      <div class="help-card">
+        <h2>Cómo explorar la vivienda</h2>
+        <div class="help-grid">
+          <div>
+            <h4>🖱️ Ratón</h4>
+            <ul>
+              <li><b>Arrastrar (izq.)</b>: girar 360°</li>
+              <li><b>Rueda</b>: zoom</li>
+              <li><b>Arrastrar (der.)</b> o <b>Mayús + arrastrar</b>: desplazar</li>
+              <li><b>Clic en una puerta</b>: abrir / cerrar</li>
+            </ul>
+          </div>
+          <div>
+            <h4>👆 Táctil</h4>
+            <ul>
+              <li><b>Un dedo</b>: girar</li>
+              <li><b>Pellizcar</b>: zoom</li>
+              <li><b>Dos dedos</b>: desplazar</li>
+              <li><b>Tocar una puerta</b>: abrir / cerrar</li>
+            </ul>
+          </div>
+          <div>
+            <h4>🚶 Primera persona</h4>
+            <ul>
+              <li><b>W A S D</b> / flechas: caminar</li>
+              <li><b>Mayús</b>: correr · <b>E</b>: puerta</li>
+              <li><b>Arrastrar</b>: mirar alrededor</li>
+              <li>Móvil: joystick + arrastrar</li>
+            </ul>
+          </div>
+          <div>
+            <h4>⌨️ Atajos</h4>
+            <ul>
+              <li><b>T</b>: iniciar recorrido · <b>Espacio</b>: pausa</li>
+              <li><b>R</b>: techo · <b>P</b>: paredes</li>
+              <li><b>N</b>: día / noche · <b>O</b>: puertas</li>
+              <li><b>Esc</b>: volver a vista exterior</li>
+            </ul>
+          </div>
+        </div>
+        <button id="helpClose" class="btn primary">Entendido</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

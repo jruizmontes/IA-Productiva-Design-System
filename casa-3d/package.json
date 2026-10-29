@@ -1,0 +1,18 @@
+{
+  "name": "casa-3d-interactiva",
+  "version": "1.0.0",
+  "description": "Simulación arquitectónica 3D interactiva de una vivienda moderna de una planta (Three.js)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "vite": "6.3.5"
+  }
+}

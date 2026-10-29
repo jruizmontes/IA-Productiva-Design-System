@@ -115,7 +115,7 @@
             position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
             color: var(--color-text-tertiary); pointer-events: none;
         }
-        .input-prefix input { padding-left: 28px; }
+        .input-prefix input[type="number"] { padding-left: 28px; }
 
         input[type="number"] {
             width: 100%;
@@ -364,7 +364,7 @@
         (function () {
             const $ = (id) => document.getElementById(id);
             const money = new Intl.NumberFormat('es-PR', { style: 'currency', currency: 'USD' });
-            const pct = new Intl.NumberFormat('es-PR', { style: 'percent', maximumFractionDigits: 1 });
+            const pct = new Intl.NumberFormat('es-PR', { style: 'percent', maximumFractionDigits: 2 });
             const ids = ['actual', 'nuevo', 'horas', 'semanas', 'extra', 'empleados', 'cargas'];
 
             const num = (id) => {
